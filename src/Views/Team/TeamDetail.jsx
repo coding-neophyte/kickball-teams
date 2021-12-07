@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { getTeamById } from '../Services/teams'
+import { getTeamById } from '../../Services/teams'
 
 export default function TeamDetail() {
     const [team, setTeam] = useState(null)
@@ -24,6 +24,22 @@ export default function TeamDetail() {
             </p>
             <h1>{team.name}</h1>
             <p> {team.city} {team.state}</p>
+
+            <h1> Roster </h1>
+            <ul>
+            {team.players.map((player) => {
+                return (
+
+                    <li key={player.id}>
+                        <Link to={`/players/${player.id}`}>
+                          <p> {player.name} </p>
+                            ({player.position})
+                            </Link>
+                    </li>
+                )
+            })}
+            </ul>
+
         </div>
     )
 }

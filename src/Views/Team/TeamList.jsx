@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState, useEffect } from 'react'
-import { getTeams } from '../Services/teams'
+import { getTeams } from '../../Services/teams'
 import { Link } from 'react-router-dom'
 
 export default function TeamList() {
@@ -19,6 +19,7 @@ export default function TeamList() {
                     <li key={team.id}>
                         <Link to={`/teams/${team.id}`}>
                             {team.name}
+
                         </Link>
                     </li>
                 );
