@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import Home from './Views/Home';
+import TeamList from './Views/TeamList';
+import TeamDetail from './Views/TeamDetail';
+import PlayerList from './Views/PlayerList';
+import PlayerDetail from './Views/PlayerDetail';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <header>
+          <NavLink to='/' className='app-link' exact> Home </NavLink>
+          <NavLink to='/teams' className='app-link'exact> Teams </NavLink>
+          <NavLink to='/players' className='app-link' exact> Players </NavLink>
+        </header>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/teams' component={TeamList} />
+          <Route exact path='/teams/teamId' component={TeamDetail} />
+          <Route exact path='/players' component={PlayerList} />
+          <Route exact path='/players/playerId' component={PlayerDetail} />
+        </Switch>
+
+      </Router>
+
     </div>
   );
 }

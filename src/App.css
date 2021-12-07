@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 .App {
   text-align: center;
 }
@@ -35,4 +37,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.app-link{
+ padding: 15px;
+ font-family: 'Permanent Marker', cursive;
+
+}
+
+.app-link:hover{
+  background-color: darkkhaki;
+}
+
+.title{
+  font-family: 'Permanent Marker', cursive;
+}
+
+.enter-button{
+  height: 65px;
+  width: 150px;
+  font-size: 30px;
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+  border-color: cornsilk;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.enter-button:hover{
+  background-color: darkkhaki;
+}
+
+.button-container{
+  display: flex;
+  justify-content: center;
+}
+
+.image-container{
+  display: flex;
+  justify-content: center;
 }
