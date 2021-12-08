@@ -13,6 +13,7 @@ export default function TeamList() {
     return (
         <div>
             <h1> Teams </h1>
+            <Link to='/teams/new'> Add a Team </Link>
             <ul>
             {teams.map((team) => {
                 return (

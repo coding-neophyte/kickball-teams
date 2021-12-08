@@ -5,6 +5,7 @@ import TeamDetail from './Views/Team/TeamDetail';
 import PlayerList from './Views/Player/PlayerList';
 import PlayerDetail from './Views/Player/PlayerDetail';
 import './App.css';
+import AddTeam from './Views/Team/AddTeam';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <NavLink to='/players' className='app-link' exact> Players </NavLink>
         </header>
         <Switch>
+          <Route exact path ='/teams/new' component={AddTeam} />
           <Route exact path='/' component={Home} />
           <Route exact path='/teams' component={TeamList} />
           <Route exact path='/teams/:teamId' component={TeamDetail} />
