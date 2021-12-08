@@ -13,7 +13,6 @@ it('should render single team', async () =>{
     );
     screen.getByText('Loading...')
     const details = await screen.findByText('Joe Bauers', { exact : false })
-    screen.debug()
 
     expect(details).toBeInTheDocument()
 })
