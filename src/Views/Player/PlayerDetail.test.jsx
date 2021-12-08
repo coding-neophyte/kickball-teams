@@ -16,7 +16,6 @@ it('should render a player detail', async () => {
                 );
 
                 screen.getByText('Loading...')
-                screen.debug()
               const playerName = await screen.findByText('Jetts', { exact: false })
 
             expect(playerName).toBeInTheDocument()
