@@ -78,3 +78,39 @@
   display: flex;
   justify-content: center;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+fieldset{
+  width: 40%;
+  height: 50%
+}
+
+.form-container{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+input{
+  height: 25px;
+}
+
+.submit-button{
+  margin-top: 20px;
+  height: 40px;
+  color: white;
+  background-color: green;
+  border-radius: 8px;
+  width: 25%;
+  font-size: 25px;
+  font-family: 'Permanent Marker', cursive;
+  margin-left: 210px;
+  border-color: honeydew;
+}
+
+a{
+  text-decoration: none;
+}

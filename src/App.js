@@ -6,6 +6,9 @@ import PlayerList from './Views/Player/PlayerList';
 import PlayerDetail from './Views/Player/PlayerDetail';
 import './App.css';
 import AddTeam from './Views/Team/AddTeam';
+import EditTeam from './Views/Team/EditTeam';
+import AddPlayer from './Views/Player/AddPlayer';
+import EditPlayer from './Views/Player/EditPlayer';
 
 function App() {
   return (
@@ -17,12 +20,15 @@ function App() {
           <NavLink to='/players' className='app-link' exact> Players </NavLink>
         </header>
         <Switch>
-          <Route exact path ='/teams/new' component={AddTeam} />
           <Route exact path='/' component={Home} />
           <Route exact path='/teams' component={TeamList} />
+          <Route exact path ='/teams/new' component={AddTeam} />
           <Route exact path='/teams/:teamId' component={TeamDetail} />
+          <Route exact path ='/teams/:id/edit' component={EditTeam} />
           <Route exact path='/players' component={PlayerList} />
+          <Route exact path ='/players/new/:teamId' component={AddPlayer} />
           <Route exact path='/players/:playerId' component={PlayerDetail} />
+          <Route exact path='/players/:playerId/edit' component={EditPlayer} />
         </Switch>
 
       </Router>

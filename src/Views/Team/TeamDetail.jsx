@@ -39,6 +39,7 @@ export default function TeamDetail() {
                 )
             })}
             </ul>
+                <Link to={`/players/new/${teamId}`}> Add New Player </Link>
 
         </div>
     )

@@ -24,6 +24,7 @@ export default function PlayerDetail() {
             </p>
             <h1> Name: {player.name}</h1>
             <p> Position: {player.position}</p>
+            <Link to={`/players/${playerId}/edit`}> Edit Player </Link>
 
         </div>
     )
