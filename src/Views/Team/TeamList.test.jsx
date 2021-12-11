@@ -1,9 +1,9 @@
 import { screen, render } from '@testing-library/react'
-import { MemoryRouter, Route, Router } from 'react-router'
+import { MemoryRouter, Route } from 'react-router'
 
 import TeamList from './TeamList'
 
-it('should render list of teams', async () => {
+it.skip('should render list of teams', async () => {
     render(
         <MemoryRouter initialEntries={['/teams']}>
             <Route path='/teams' component={TeamList} />
