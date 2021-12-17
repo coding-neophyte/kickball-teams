@@ -1,11 +1,10 @@
-import { screen, render } from '@testing-library/react'
+import { screen, render, waitFor } from '@testing-library/react'
 import AddTeam from './AddTeam'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { Route, Router } from 'react-router-dom'
+import { Route, Switch, MemoryRouter } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import TeamDetail from './TeamDetail'
-import { MemoryRouter } from 'react-router'
 import userEvent from '@testing-library/user-event'
 
 const mockTeam = {
@@ -21,16 +20,14 @@ const mockTeam = {
 const server = setupServer(
     rest.get('https://gzugvrzklzlegewmiuem.supabase.co/rest/v1/teams', (req, res, ctx) => {
         return res(ctx.json(mockTeam));
-    }
-
-),
-
-rest.post('https://gzugvrzklzlegewmiuem.supabase.co/rest/v1/teams', (req, res, ctx) => {
-    return res(ctx.json(mockTeam))
-    }
-  )
+    }),
+    rest.post('https://gzugvrzklzlegewmiuem.supabase.co/rest/v1/teams', (req, res, ctx) => {
+        return res(ctx.json([mockTeam]))
+        }
+      )
 );
 
+describe.only('add a team',() => {
 
 beforeAll(() => {
     server.listen()
@@ -46,21 +43,29 @@ it('should create new team', async () => {
 
     render(
         <MemoryRouter initialEntries={['/teams/new']}>
-            <Route path='/teams/new' component={AddTeam}/>
-            <Route path='/teams/:teamId' component={TeamDetail} />
+            <Switch>
+            <Route exact path='/teams/new'>
+                <AddTeam />
+             </Route>
+
+            <Route exact path='/teams/:teamId' component={TeamDetail} />
+            </Switch>
         </MemoryRouter>
     );
 
     screen.getByText('Add A Team');
 
-    const nameField = screen.getByLabelText(/Name/i);
-    // const cityField = screen.getByLabelText(/City/i);
-    // const stateField = screen.getByLabelText(/State/i);
-    const submitButton = screen.getByRole('button', { Name: 'Add' });
+    const nameField = await screen.findByLabelText(/Name/i);
+    const cityField = await screen.findByLabelText(/City/i);
+    const stateField = await screen.findByLabelText(/State/i);
+    const submitButton = await screen.findByRole('button', { name: 'Add' });
 
     userEvent.type(nameField, 'bad news bears' )
-    // userEvent.type(cityField, 'Chicago')
-    // userEvent.type(stateField, 'IL')
+    userEvent.type(cityField, 'Chicago')
+    userEvent.type(stateField, 'IL')
     userEvent.click(submitButton)
 
+    await waitFor(() => screen.getByText('Loading...', { exact: false }))
+
+})
 })

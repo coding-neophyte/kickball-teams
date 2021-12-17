@@ -4,7 +4,6 @@ import { setupServer } from 'msw/node'
 import { Route, Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import EditTeam from './EditTeam'
-import { MemoryRouter } from 'react-router'
 import userEvent from '@testing-library/user-event'
 import TeamDetail from './TeamDetail'
 
@@ -18,26 +17,17 @@ const mockTeam = {
 
 }
 
-const mockTeam2 = {
-    id: 7,
-    created_at: '2021-12-08T20:26:24.408898+00:00',
-    name: 'bad news cubs',
-    city: 'Chicago',
-    state: 'IL',
-    players: [],
-
-}
 
 const server = setupServer(
 
 
-rest.get('https://gzugvrzklzlegewmiuem.supabase.co/rest/v1/teams/:teamId', (req, res, ctx) => {
+rest.get('https://gzugvrzklzlegewmiuem.supabase.co/rest/v1/teams', (req, res, ctx) => {
     return res(ctx.json(mockTeam))
 }
 
 ),
-rest.put('https://gzugvrzklzlegewmiuem.supabase.co/rest/v1/teams/:id/edit', (req, res, ctx) => {
-    return res(ctx.json(mockTeam2))
+rest.patch('https://gzugvrzklzlegewmiuem.supabase.co/rest/v1/teams', (req, res, ctx) => {
+    return res(ctx.json([mockTeam]));
     }
   )
 );
@@ -49,19 +39,41 @@ afterAll(() => {
     server.close()
 })
 
-
+describe('edit team', () => {
 it('edits an existing team', async () => {
+    const history = createMemoryHistory()
+    history.push('/teams/:id/edit')
+
     render(
-    <MemoryRouter initialEntries={['/teams/:teamId']}>
-        <Route path='/teams/:teamId' component={TeamDetail}/>
-        <Route path='/teams/:id/edit' component={EditTeam}/>
-    </MemoryRouter>
+    <Router history={history}>
+        <Route exact path='/teams/:id/edit'>
+            <EditTeam />
+        </Route>
+        <Route exact path='/teams/:teamId' component={TeamDetail}/>
+
+    </Router>
 
 
     )
-        screen.getByText('Update Team Info');
+        screen.getByText('Loading...');
 
-        const nameUpdate = screen.getLabelByText(/Name/i)
-        const cityUpate = screen.getLabelByText(/City/i)
-        co
+         await screen.findByLabelText(/name/i)
+         await screen.findByLabelText(/city/i)
+        await screen.findByLabelText(/state/i)
+        const submitButton = await screen.findByRole('button', { name: 'Update' })
+        const nameInput = await screen.findByDisplayValue('bad news bears')
+        const cityInput = await screen.findByDisplayValue('Chicago')
+        const stateInput = await screen.findByDisplayValue('IL')
+        mockTeam.name = 'bad news cubs'
+        mockTeam.city = 'Jersey City'
+        mockTeam.state = 'NJ'
+        userEvent.type(nameInput, 'bad news cubs')
+        userEvent.type(cityInput, 'Jersey City')
+        userEvent.type(stateInput, 'NJ')
+        userEvent.click(submitButton)
+
+        await screen.findByText('Loading...', { exact: false })
+
+        await screen.findByText('bad news cubs', { exact: false })
+})
 })

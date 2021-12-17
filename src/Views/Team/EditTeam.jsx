@@ -29,7 +29,7 @@ export default function EditTeam() {
 
         }
         grabTeam();
-    }, [])
+    }, [id])
 
 
     const handleTeamUpdate = async (e) =>{
@@ -42,16 +42,10 @@ export default function EditTeam() {
     if(isLoading) return <h1> Loading... </h1>
     return (
         <div>
-            <div style={{ marginLeft: '50px', marginTop: '60px'}}>
-            <h1>{team.name}</h1>
-            <p> {team.city} {team.state}</p>
-            </div>
-            {/* <p> {team.players}</p> */}
-            <div className='form-container'>
             <fieldset>
                 <legend>Update Team Info</legend>
                 <form onSubmit={handleTeamUpdate}>
-                    <label htmlFor='name'>Name:</label>
+                    <label htmlFor='name'>Name</label>
                     <input type='text' id='name' name='name' defaultValue={team.name} onChange={(e) => setName(e.target.value)}/>
 
                     <label htmlFor='city'>City:</label>
@@ -63,6 +57,5 @@ export default function EditTeam() {
                 </form>
             </fieldset>
             </div>
-        </div>
     )
 }

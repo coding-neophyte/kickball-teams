@@ -23,7 +23,7 @@ export default function EditPlayer() {
 
         }
         playerById()
-    }, [])
+    }, [playerId])
 
     const handleUpdatePlayer = async(e) => {
         e.preventDefault()
@@ -43,7 +43,7 @@ export default function EditPlayer() {
                     <input onChange={(e) => setName(e.target.value)} defaultValue={player.name} type='text' id='name' name='name'/>
 
                     <label htmlFor='position'>Position:</label>
-                    <input onChange={(e) => setPosition(e.target.value)} defaultValue={player.position} type='text' id='positon' name='position'/>
+                    <input onChange={(e) => setPosition(e.target.value)} defaultValue={player.position} type='text' id='position' name='position'/>
                     <button type='submit'>Update</button>
                 </form>
             </fieldset>

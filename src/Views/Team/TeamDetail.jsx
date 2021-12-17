@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { getTeamById } from '../../Services/teams'
 
 export default function TeamDetail() {
-    const [team, setTeam] = useState(null)
+    const [team, setTeam] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const { teamId } = useParams()
 

@@ -5,10 +5,10 @@ import { useParams } from 'react-router'
 import { useState, useEffect } from 'react'
 
 export default function PlayerDetail() {
-    const [player, setPlayer] = useState(null)
+    const [player, setPlayer] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const { playerId } = useParams()
-
+    console.log(playerId)
     useEffect(() => {
         getPlayerById(playerId)
         .then((resp) => setPlayer(resp))
